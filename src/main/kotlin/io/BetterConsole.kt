@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter
 
 import kotlin.system.exitProcess
 
-
 @Suppress("unused")
 class BetterConsole : Plugin() {
     override fun init() {
