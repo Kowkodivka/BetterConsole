@@ -1,6 +1,8 @@
 # Better console
-Makes using the console more comfortable.
 Kotlin version of the plugin https://github.com/osp54/BetterConsole
+
+Makes using the console more comfortable:
+https://user-images.githubusercontent.com/86189625/183602444-f9608826-5152-4a82-a672-a1adbec56228.mp4
 
 ### Setup
 
