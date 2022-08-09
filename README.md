@@ -10,7 +10,7 @@ To edit the plugin display name and other data, take a look at `plugin.json`.
 ### Building a Jar
 
 If you use Linux / Mac OS:
-`chmod +x gradlew`
+`chmod +x ./gradlew`
 
 Then:
 `gradlew jar` / `./gradlew jar`
