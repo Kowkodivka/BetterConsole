@@ -56,7 +56,7 @@ class BetterConsole : Plugin() {
                     log.replace(reset, lightRed + bold)
                 } else log
 
-                val result = "$bold $lightBlack [${dateTime.format(LocalDateTime.now())}] $reset ${format(tags[level.ordinal])} $resultLog"
+                val result = "$bold$lightBlack[${dateTime.format(LocalDateTime.now())}] $reset ${format(tags[level.ordinal])} $resultLog"
 
                 if (lineReader.isReading) {
                     lineReader.callWidget(LineReader.CLEAR)
@@ -67,7 +67,7 @@ class BetterConsole : Plugin() {
                 } else lineReader.terminal.writer().println(result)
 
                 if (Administration.Config.logging.bool()) {
-                    logToFile("[${dateTime.format(LocalDateTime.now())}] ${formatColors(tags[level.ordinal], false)} $resultLog &fr")
+                    logToFile("[${dateTime.format(LocalDateTime.now())}] ${formatColors(tags[level.ordinal], false)} $resultLog")
                 }
             }
         } catch (e: Exception) {
