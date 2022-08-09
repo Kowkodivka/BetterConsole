@@ -5,25 +5,44 @@ plugins {
     application
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-application {
-    mainClass.set("MainKt")
+repositories {
+    mavenCentral()
+    maven(url = "https://www.jitpack.io")
+}
+
+dependencies {
+    val mindustryVersion = "v136"
+    val jline = "3.21.0"
+
+    compileOnly("com.github.Anuken.Arc:arc-core:$mindustryVersion")
+    compileOnly("com.github.Anuken.Mindustry:core:$mindustryVersion")
+    compileOnly("com.github.Anuken.Mindustry:server:$mindustryVersion")
+
+    implementation("org.jline:jline-reader:$jline")
+    implementation("org.jline:jline-terminal-jna:$jline")
+}
+
+tasks.register<Copy>("copy") {
+    from("/home/lucin/IdeaProjects/${project.name}/build/libs/${project.name}.jar")
+    into("/home/lucin/Shit/server/config/mods")
+}
+
+tasks.jar {
+    archiveFileName.set("${project.name}.jar")
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) }){
+        exclude("**/META-INF/*.SF")
+        exclude("**/META-INF/*.DSA")
+        exclude("**/META-INF/*.RSA")
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    from(resources.toString()) {
+        include("plugin.json")
+    }
+
+    finalizedBy(tasks.getByName("copy"))
 }
